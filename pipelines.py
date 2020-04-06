@@ -7,11 +7,12 @@
 import scrapy
 from pymongo import MongoClient
 from scrapy.pipelines.images import ImagesPipeline
+from log_pass import MONGO_LOGIN, MONGO_PWD
 
 
 class BlogparsePipeline(object):
     def __init__(self):
-        client = MongoClient("mongodb+srv://Admin:000000@cluster0-ujirt.mongodb.net/test?retryWrites=true&w=majority")
+        client = MongoClient(f"mongodb+srv://{MONGO_LOGIN}:{MONGO_PWD}@cluster0-ujirt.mongodb.net/test?retryWrites=true&w=majority")
         self.db = client['parse']
 
     def process_item(self, item, spider):
